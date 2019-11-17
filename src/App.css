@@ -1,120 +1,70 @@
-/* .App {
-  text-align: center;
-} */
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-/* For index.html */
-[class*="col-"] {
-  width: 100%;
-}
-
-@media only screen and (min-width: 600px) {
-  /* For tablets: */
-  .col-s-1 {width: 8.33%;}
-  .col-s-2 {width: 16.66%;}
-  .col-s-3 {width: 25%;}
-  .col-s-4 {width: 33.33%;}
-  .col-s-5 {width: 41.66%;}
-  .col-s-6 {width: 50%;}
-  .col-s-7 {width: 58.33%;}
-  .col-s-8 {width: 66.66%;}
-  .col-s-9 {width: 75%;}
-  .col-s-10 {width: 83.33%;}
-  .col-s-11 {width: 91.66%;}
-  .col-s-12 {width: 100%;}
-}
-
-@media only screen and (min-width: 768px) {
-  /* For desktop: */
-  .col-1 {width: 8.33%;}
-  .col-2 {width: 16.66%;}
-  .col-3 {width: 25%;}
-  .col-4 {width: 33.33%;}
-  .col-5 {width: 41.66%;}
-  .col-6 {width: 50%;}
-  .col-7 {width: 58.33%;}
-  .col-8 {width: 66.66%;}
-  .col-9 {width: 75%;}
-  .col-10 {width: 83.33%;}
-  .col-11 {width: 91.66%;}
-  .col-12 {width: 100%;}
-}
 
 .header{
-  background-color:rgba(255,255,255,0.8);
+  background-color:rgb(255, 255, 255);
   width: 100%;
-  height: 8.7%;
-  margin-top: -8%;
+  height: 70px;
+  left: 0;
+  top:0;
   position: fixed;
   z-index: 1;
+  box-shadow: 0px 2px 10px rgba(99, 29, 49, 0.8);
+  cursor:pointer;
 }
 .header ul{
-  margin-left:70%;
+  margin-left:75%;
   height: 79%;
   width: 30%;
-  margin-top:-5%; 
-  /* background-color: aqua; */
   padding-top: 1%;
   padding-left: 0;
   padding-right: 0;
   text-align: center;
-  /* position: relative; */
+  top:0;
+  right:0;
+  transform: translateY(-100px);
+  position: relative;
   overflow: hidden;
+  
 }
 .header li{
   max-width: 25%;
-  /* width: auto; */
-  margin-top: 0;
   height: 80%;
   list-style: none;
   vertical-align: middle;
-  text-align: center;
   text-decoration: none;
-  color:darkslategrey;
-  font-family:"dancing script";
-  text-align: middle; 
-  font-size: 180%;
-  margin-left: 5%;
-  margin-right: 1%;
+  margin-right: 8%;
   display: inline-block;
   position: relative;
-  /* background-color: chartreuse; */
-  padding-top: 1%;
-  cursor:pointer;
+  padding-top: 2%;
+}
+.header li a {
+  display: inline-block;
+  font-family: 'Lato', sans-serif;
+  font-size: 140%;
+  color:darkslategrey;
+  text-decoration: none;
+  
+}
+
+.header li a::after {
+  content: '';
+  display: block;
+  margin-top: 15px;
+  width: 0;
+  height: 2px;
+  bottom:0;
+  background: rgb(207, 30, 80);
+  transition: width .2s;
+}
+
+.header li :hover::after {
+  width: 100%;
+  /* transition: width .3s; */
 }
 .header ul li img{
-  /* vertical-align: middle; */
-  width:30%;
-  margin-top: 1%;
-  padding-top: 0;
+  height:40px;
+  clip-path: circle('50%');
+  margin-top: 0%;
+  transform: translateY(-8px);
 }
 .header ul p{
   display: inline-block;
@@ -122,96 +72,114 @@
   height: 1%;
   max-width: 100%;
 }
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 .headerName{
   width: 70%;
   height: 100%;
-  font-size: 250%;
+  font-size: 150%;
   color: darkslategrey;
-  padding-left: 10%;
-  margin-left: 30%;
-  margin-top:-4%; 
-  font-family:'Dancing Script'
+  padding-top: 0%;
+  margin-left: 8%;
+  margin-top:-4%;
+  transform: translateY(-5px); 
+  font-family: 'Lato', sans-serif;
+  color:rgb(253, 117, 140);
 }
 .logo{
   width: 5%;
   height: 100%;
-  margin-left: 0;
+  margin-left: 3%;
 }
 .hot{
-  width:80%;
-  height:auto;
-  background-color: rgba(255, 255, 255, 0.233);
+  width:90%;
+  height:100%;
+  /* background-color: rgba(252, 250, 250, 0.95); */
   margin-left: 10%;
-  margin-top: 8%;
+  color:rgb(0, 87, 87);
+  margin-top: 0;
   font-size: 50px;
+  padding-top: 1% ;
   padding-bottom: 5%;
-  margin-bottom: 3%;
-  display: flex;
+  margin-bottom: 0;
+  font-weight: 700;
+  /* box-shadow: 0px  4px 8px 0 rgba(99, 29, 49, 0.8); */
 }
-.hot p{
+/* .hot p{
   margin-top: 0%;
-  margin-left: 5%;  
+  margin-left: 3%;
   position: absolute;
-}
-.hotImg{
+} */
+/* .hotImg{
   float: left;
   max-width:2.5%;
   margin-left: 2%;
   margin-top: 1%;
   position: absolute;
   vertical-align:top; 
-}
+  
+} */
 .card {
   overflow: hidden;
+  border-radius: 7px 7px 7px 0px;
   float: left;
   box-shadow: 0px  4px 8px 0 rgba(0, 0, 0, 0.8);
-  max-width: 20%;
+  min-width: 18%;
+  max-width: 18%;
   height: 100%;
   font-size: 25%;
   text-align: center;
   font-family: arial;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: black;
+  background-color: rgb(255, 255, 255);
   margin-top: 7%;
-  margin-left: 5%;
+  /* margin-left: %; */
+  margin-right: 7%;
   margin-bottom: 0;
 }
 .card img{
-  height: 300px;
-  min-width: 100%;
+  border-bottom: 2px solid black;
+  height: 250px;  
   margin-bottom: 2%;
 }
 .card h1{
   font-family: 'Roboto', sans-serif;
   font-size: auto;
-  color: cornsilk;
+  /* color: cornsilk; */
   margin-top: 1%;
   margin-bottom: 5%;
 }
-.price {
-  color:cornsilk;
-  margin-bottom: 2%;
-  margin-top: 2%;
-}
 
-.card button {
+.DesignTrigb {
   border: none;
-  outline: 0;
+  /* outline: 0; */
   padding-top: 0.5%;
   padding-bottom: 1%;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 0;
+  padding-right: 0; 
   color: white;
-  background-color:rgba(0, 0, 0, 0.8);
+  background-color:rgb(119, 48, 60);
   text-align: center;
   cursor: pointer;
-  min-width: 7%;
-  height: 5%;
-  font-size: 18px;
+  width: 0%;
+  height: 0%;
+  font-size: 160%;
   margin-top: 0;
-  position: absolute;
-  display: block;
+  left: 10%;
+  /* position: absolute; */
+  display: relative;
+  transition: 0.2s;
+  border-radius: 15px 15px 15px 15px;
+  
 }
 
+.card:hover  .DesignTrigb{
+  /* display: block; */
+  width : 35%;
+  height: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
+  
+}
 .card2{
   width: 30%;
   float: left;

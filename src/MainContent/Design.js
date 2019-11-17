@@ -27,18 +27,13 @@ class DesignCard extends Component{
         product_deleted : false
     }
     DesignDelete=(Imgurl)=>{
-        // var products = 
-        console.log('-*************** 1 ************')
         for( var i = 0; i < productsInDesign.length; i++){
-            console.log('-*************** 12 ************') 
             if ( productsInDesign[i].imgUrl === Imgurl) {
-                console.log('-*************** 13 ************')
                 productsInDesign.splice(i, 1); 
                 i--;
             }
         }
-        console.log(productsInDesign)
-        this.setState({product_deleted:false})
+        this.props.parentMethod(true)
     }
 
     render(){
@@ -62,25 +57,30 @@ class DesignPlace extends Component{
         
         Dcont_style : {
             display: 'block',
-            bottom: '0',
-            left:'6.5%',
+            top: '25%',
+            left:'0',
             position: 'fixed',
+        },
+        closeD:{
+            fontSize:'100%',
+            display: 'none',
         },
         CardCont : {
             height : '100%'
         },
         Dtitle_style :{
-            backgroundColor: 'rgb(0, 102, 153)',
+            backgroundColor: 'rgb(253, 27, 64)',
 	        color: 'white',
             fontSize: '140%',
-            height: '30%',
-            minWidth: '105%',
+            height: '30px',
+            minWidth: '185%',
             paddingTop: '1%',
-            paddingBottom: '1%',
-            paddingRight: '1%',
-            paddingLeft: '2%',
+            paddingBottom:'2%',
+            textAlign: 'center',
             cursor: 'pointer',
-         },
+            fontWeight:'700',
+            borderRadius:'0 5px 5px 0'
+        },
         DesignArea : {
             width:'0',
             padding: '1% 0 0 0',
@@ -89,69 +89,77 @@ class DesignPlace extends Component{
             backgroundColor: '#282c34',
         },
     }
-    constructor(){
-        super()
-        document.addEventListener("click", element => {
-            // const Dtitle = document.querySelector(".Dtitle")
-            // const b2 = document.querySelector(".b2")
-            const Mcont = document.querySelector(".Mcont")
-            const Ititle = document.querySelector(".Ititle")
-            const Dcont = document.querySelector(".Dcont")
-            // console.log(Dcont)
-            if ((Dcont.contains(element.target))&& !(this.state.clickMaximize) ){
-                Mcont.style.left = '72.3%'
-                this.Design_Maximize(true)
-            }
-            else{
-                Ititle.contains(element.target) && (Dcont.style.left === '65.8%') ? Mcont.style.left = '70.6%' :Mcont.style.left = '11.2%'  
-                this.Design_Maximize(false)
-            }
-        });
-    } 
-    
     Design_Maximize=(Dstate)=>{
-        let DesignArea  = {
-            width: '1000px',
-            padding: '1% 0 0 0',
-            height: '0',
-            overflowX: 'hidden',
-            backgroundColor: '#282c34',
-        }    
-        let Dtitle_style ={
-            backgroundColor: 'rgb(0, 102, 153)',
-	        color: 'white',
-            fontSize: '140%',
-            height: '30%',
-            minWidth: '105%' ,
-            maxWidth: '100%',
-            paddingTop: '1%',
-            paddingBottom: '1%',
-            paddingRight: '1%',
-            paddingLeft: '2%',
-            cursor: 'pointer'
-        }    
-        if(Dstate){   
-            DesignArea.height = '400px'
-            Dtitle_style.paddingLeft = '2%'
-            Dtitle_style.paddingRight = '0'
-            Dtitle_style.minWidth = '0'
+        var Iclose = document.getElementsByClassName('Icont')[0]
+        if (Iclose.style.left === '0px'){
+            let DesignArea  = {
+                width: '1000px',
+                padding: '1% 0 0 0',
+                height: '0',
+                overflowX: 'hidden',
+                backgroundColor: '#282c34',
+                borderRadius: '0 0 5px 5px',
+            }
+            let Dcont_style = {
+                display: 'block',
+                top: '25%',
+                left:'0',
+                position: 'fixed',
+            }    
+            let closeD={
+                display: 'none',
+                fontSize:'100%',
+                marginLeft: '85%',
+            }
+            let Dtitle_style ={
+                backgroundColor: 'rgb(253, 27, 64)',
+                color: 'white',
+                fontSize: '140%',
+                height: '30px',
+                minWidth: '185%' ,
+                // maxWidth: '100%',
+                paddingTop: '1%',
+                paddingBottom: '2%',
+                // paddingRight: '1%',
+                // paddingLeft: '2%',
+                cursor: 'pointer',
+                fontWeight:'700',
+                // marginRight:'20%',
+                borderRadius:'5px 5px 0 0'
+            }    
+            if(Dstate){   
+                DesignArea.height = '400px'
+                Dtitle_style.paddingLeft = '2%'
+                Dtitle_style.maxWidth = '100%'
+                Dtitle_style.minWidth = '0'
+                Dtitle_style.paddingBottom = '1%'
+                closeD.display = 'inline'
+                Dcont_style.top = '30%'
+                Dcont_style.left = '20%'
+                Dcont_style.zIndex = '1'
+            }
+            else{         
+                Dtitle_style.borderRadius = '0 5px 5px 0'
+                DesignArea.height = '0'
+                DesignArea.width = '0' 
+                Dtitle_style.textAlign = 'center'
+            }
+            this.setState({ DesignArea : DesignArea , clickMaximize : Dstate , Dtitle_style : Dtitle_style , Dcont_style : Dcont_style , closeD : closeD })
         }
-        else{         
-            DesignArea.height = '0'
-            DesignArea.width = '0' 
-            Dtitle_style.maxWidth = '100%'
+        else{
+            window.alert("Inventory is open. Please close it ti continue to Designing area.. Thank You!!")
         }
-        this.setState({ DesignArea : DesignArea , clickMaximize : Dstate , Dtitle_style : Dtitle_style  })
+        
     }
 
     render(){
         return(
-            <div style={ this.state.Dcont_style } className='Dcont'>
-                <div  className='Dtitle' style={this.state.Dtitle_style}>Design</div>
+            <div style={ this.state.Dcont_style } className ='Dcont'>
+                <div style={this.state.Dtitle_style}><span onClick={()=> this.Design_Maximize(true)}>Design</span><div onClick={()=> this.Design_Maximize(false)} style={this.state.closeD}>&times;</div></div>
                 <div style={this.state.DesignArea}>
                     {productsInDesign.map((imgUrl) => {
                         // console.log(imgUrl.imgUrl)
-                        return (<div  style={this.state.CardCont}><DesignCard url={imgUrl.imgUrl} name={imgUrl.name} /> <Options/> </div>)
+                        return (<div  style={this.state.CardCont}><DesignCard url={imgUrl.imgUrl} name={imgUrl.name} parentMethod = {this.Design_Maximize} /> <Options/> </div>)
                     })}
                 </div>  
             </div>

@@ -51,22 +51,31 @@ class Inventory extends Component{
         
         Icont_style : {
             display: 'block',
-            bottom: '0',
+            top: '20%',
             left:'0',
             position: 'fixed',
         },
+        closeI:{
+            display: 'none',
+            fontSize:'100%',
+            marginLeft: '50%',
+        },
         
         Ititle_style :{
-            backgroundColor: 'tomato',
+            backgroundColor: 'rgb(253, 27, 64)',
 	        color: 'white',
             fontSize: '140%',
-            height: '30%',
-            minWidth: '105%',
+            height: '30px',
+            minWidth: '130%',
+            textAlign:'center',
             paddingTop: '1%',
-            paddingBottom: '1%',
-            paddingRight: '1%',
-            paddingLeft: '2%',
+            paddingBottom: '2%',
+            // paddingRight: '1%',
+            // paddingLeft: '3%',
             cursor: 'pointer',
+            fontWeight:'700',
+            // marginRight:'20%',
+            borderRadius:'0 5px 5px 0'
          },
         Inventory : {
             width:'0',
@@ -76,66 +85,75 @@ class Inventory extends Component{
             backgroundColor: '#282c34',
         },
     }
-    constructor(){
-        super()
-        document.addEventListener("click", element => {
-            const Ititle = document.querySelector(".Ititle");
-            const Dtitle = document.querySelector(".Dcont");
-            const Mcont = document.querySelector(".Mcont");
-            if(Ititle.contains(element.target)&& !(this.state.clickMaximize)){
-                Dtitle.style.left = '65.8%'
-                // Mcont.style.left = '69.8%'
-                this.Inventory_Maximize(true) 
-                
-            }    
-            else{
-                Dtitle.style.left = '6.5%'
-                Mcont.style.left = '11.2%'
-                this.Inventory_Maximize(false)
-            }
-               
-        });
-    } 
-
     Inventory_Maximize=(Istate)=>{
-        let Inventory  = {
-            width: '1000px',
-            padding: '1% 0 0 0',
-            height: '0',
-            overflowX: 'hidden',
-            backgroundColor: '#282c34',
-        }    
-        let Ititle_style ={
-            backgroundColor: 'tomato',
-	        color: 'white',
-            fontSize: '140%',
-            height: '30%',
-            minWidth: '105%' ,
-            maxWidth: '100%',
-            paddingTop: '1%',
-            paddingBottom: '1%',
-            paddingRight: '1%',
-            paddingLeft: '2%',
-            cursor: 'pointer'
-        }    
-        if(Istate){   
-            Inventory.height = '400px'
-            Ititle_style.paddingLeft = '2%'
-            Ititle_style.paddingRight = '0'
-            Ititle_style.minWidth = '0'
+        var Iclose = document.getElementsByClassName('Dcont')[0]
+        if (Iclose.style.left === '0px'){
+            let Icont_style = {
+                display: 'block',
+                top: '20%',
+                left:'0',
+                position: 'fixed', 
+            }
+            let closeI={
+                display: 'none',
+                fontSize:'100%',
+                marginLeft: '85%',
+            }
+            let Inventory  = {
+                width: '1000px',
+                padding: '1% 0 0 0',
+                height: '0',
+                overflowX: 'hidden',
+                backgroundColor: '#282c34',
+                borderRadius: '0 0 5px 5px',
+            }    
+            let Ititle_style ={
+                backgroundColor: 'rgb(253, 27, 64)',
+                color: 'white',
+                fontSize: '140%',
+                // height: '35px',
+                minWidth: '130%' ,
+                // maxWidth: '100%',
+                paddingTop: '1%',
+                paddingBottom:'2%',
+                // paddingLeft: '2%',
+                cursor: 'pointer',
+                fontWeight:'700',
+                // marginRight:'20%',
+                borderRadius:'5px 5px 0 0',
+    
+            }    
+            if(Istate){   
+                Inventory.height = '400px'
+                Ititle_style.paddingLeft = '2%'
+                Ititle_style.maxWidth = '100%'
+                Ititle_style.minWidth = '0'
+                Ititle_style.paddingBottom = '1%'
+                Icont_style.top = '30%'
+                Icont_style.left = '20%'
+                Icont_style.zIndex = '1'
+                closeI.display = 'inline'
+            }
+            else{         
+                Inventory.height = '0'
+                Inventory.width = '0' 
+                Ititle_style.borderRadius = '0 5px 5px 0'
+                Ititle_style.textAlign = 'center'
+                Ititle_style.height = '30px'
+                Ititle_style.minWidth = '130%'
+            }
+            this.setState({ Inventory : Inventory , clickMaximize : Istate , Ititle_style : Ititle_style , Icont_style : Icont_style , closeI : closeI })
+        
         }
-        else{         
-            Inventory.height = '0'
-            Inventory.width = '0' 
-            Ititle_style.maxWidth = '100%'
+        else{
+            window.alert('Designing area is open. Please close it ti continue to inventory.. Thank You!!')
         }
-        this.setState({ Inventory : Inventory , clickMaximize : Istate , Ititle_style : Ititle_style  })
     }
 
     render(){
         return(
-            <div style={ this.state.Icont_style }>
-                <div  className='Ititle' style={this.state.Ititle_style}>Inventory</div>
+            <div style={ this.state.Icont_style } className='Icont'>
+                <div style={this.state.Ititle_style}><span onClick={()=>this.Inventory_Maximize(true)}>Inventory</span><div onClick={()=>this.Inventory_Maximize(false)} style={this.state.closeI}>&times;</div></div>
                 <div style={this.state.Inventory}>
                     {productsToInventory.map((imgUrl) => {
                         console.log(imgUrl.imgUrl)
